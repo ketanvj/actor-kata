@@ -29,4 +29,12 @@ public class PeopleControllerShould {
         Optional<Person> person = peopleController.getById(500);
         verify(peopleService).getById(500);
     }
+
+    @Test
+    public void invoke_service_to_get_movies_by_id() {
+        PeopleController peopleController = new PeopleController(peopleService);
+        Optional<List<Movie>> movies = peopleController.getMoviesById(500);
+        verify(peopleService).getMoviesById(500);
+
+    }
 }

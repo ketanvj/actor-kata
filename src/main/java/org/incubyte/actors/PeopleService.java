@@ -6,7 +6,7 @@ import jakarta.inject.Singleton;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Clock;
-import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -45,5 +45,12 @@ public class PeopleService {
             e.printStackTrace();
         }
         return byId;
+    }
+
+    public Optional<List<Movie>> getMoviesById(int id) {
+        Optional<MovieResult>  wrapAllMovies  = tmbdClient.getMoviesById(id, apiKey);
+        MovieResult moviesResult = wrapAllMovies.get();
+        List<Movie> allMovies = moviesResult.getMovies();
+        return Optional.of(allMovies);
     }
 }

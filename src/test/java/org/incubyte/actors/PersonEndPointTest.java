@@ -8,19 +8,14 @@ import io.micronaut.http.client.annotation.Client;
 import io.micronaut.http.client.exceptions.HttpClientResponseException;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
 import jakarta.inject.Inject;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
-import java.time.Clock;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.when;
 
 @MicronautTest
 public class PersonEndPointTest {
@@ -58,5 +53,27 @@ public class PersonEndPointTest {
         assertThat(person.getGender()).isEqualTo(2);
         assertThat(person.getPlaceOfBirth()).isEqualTo("Syracuse, New York, USA");
     }
+
+    @Test
+    public void should_return_all_movies_for_a_person_id() {
+
+        //Arrange
+        //Act
+        List<Movie> movies = httpClient.toBlocking().retrieve(HttpRequest.GET("people/500/movie_credits"), Argument.listOf(Movie.class));
+        //Assert
+        assertThat(movies).hasSize(82);
+
+    }
+    @Test
+    public void should_return_all_tvs_for_a_person_id() {
+
+        //Arrange
+        //Act
+        List<TVShow> tvs = httpClient.toBlocking().retrieve(HttpRequest.GET("people/500/tv_credits"), Argument.listOf(TVShow.class));
+        //Assert
+        assertThat(tvs.size()).isGreaterThan(0);
+
+    }
+
 
 }

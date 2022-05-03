@@ -25,6 +25,8 @@ class PeopleServiceShould {
     TmbdClient tmbdClient;
     Page page;
     Page page2;
+
+    Movie movie1, movie2;
     private final Clock clock = Clock.fixed(ZonedDateTime.parse("2021-10-25T00:00:00.000+09:00[Asia/Seoul]").toInstant(), ZoneId.of("Asia/Seoul"));
     Person person;
 
@@ -49,6 +51,12 @@ class PeopleServiceShould {
 
         person = new Person();
         person.setBirthday("1962-07-03");
+        movie1 = new Movie();
+        movie1.setName("Rain Main");
+        movie2 = new Movie();
+        movie2.setName("Eyes Wide Shut");
+
+
 
     }
 
@@ -78,4 +86,14 @@ class PeopleServiceShould {
         Optional<Person> person = peopleService.getById(500);
         assertThat(person.get().getAge()).isEqualTo(59);
     }
+
+
+    @Test
+    public void invoke_http_client_to_retrieve_movies_for_a_given_id() {
+        List<Movie> movies = new ArrayList<>();
+        PeopleService peopleService = new PeopleService(tmbdClient);
+        Optional<List<Movie>> retrievedMovies = peopleService.getMoviesById(500);
+        verify(tmbdClient).getMoviesById(500, null);
+    }
+
 }

@@ -5,6 +5,7 @@ import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.PathVariable;
 import io.micronaut.http.annotation.QueryValue;
 
+import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
 import java.util.Optional;
 @Controller("people")
@@ -29,5 +30,10 @@ public class PeopleController {
   @Get("/{id}/movie_credits")
     public Optional<List<Movie>> getMoviesById(int id) {
        return peopleService.getMoviesById(id);
+  }
+
+  @Get("/{id}/tv_credits")
+  public Optional<List<TVShow>> getTvShowById(int id) {
+      return peopleService.getTvShowsById(id);
   }
 }

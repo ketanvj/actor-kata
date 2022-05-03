@@ -71,7 +71,7 @@ public class PersonEndPointTest {
         //Act
         List<TVShow> tvs = httpClient.toBlocking().retrieve(HttpRequest.GET("people/500/tv_credits"), Argument.listOf(TVShow.class));
         //Assert
-        assertThat(tvs.size()).isGreaterThan(0);
+        assertThat(tvs).hasSize(26);
 
     }
 

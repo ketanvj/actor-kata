@@ -6,7 +6,6 @@ import jakarta.inject.Singleton;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Clock;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -52,5 +51,12 @@ public class PeopleService {
         MovieResult moviesResult = wrapAllMovies.get();
         List<Movie> allMovies = moviesResult.getMovies();
         return Optional.of(allMovies);
+    }
+
+    public Optional<List<TVShow>> getTvShowsById(int id) {
+        Optional<TvResult>  wrapAllMovies  = tmbdClient.getTvShowsById(id, apiKey);
+        TvResult moviesResult = wrapAllMovies.get();
+        List<TVShow> allTvShows = moviesResult.getTvShows();
+        return Optional.of(allTvShows);
     }
 }

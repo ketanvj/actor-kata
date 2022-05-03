@@ -37,4 +37,11 @@ public class PeopleControllerShould {
         verify(peopleService).getMoviesById(500);
 
     }
+    @Test
+    public void invoke_service_to_get_tv_by_id() {
+        PeopleController peopleController = new PeopleController(peopleService);
+        Optional<List<TVShow>> tv = peopleController.getTvShowById(500);
+        verify(peopleService).getTvShowsById(500);
+
+    }
 }

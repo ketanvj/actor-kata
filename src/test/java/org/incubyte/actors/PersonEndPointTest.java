@@ -62,6 +62,8 @@ public class PersonEndPointTest {
         List<Movie> movies = httpClient.toBlocking().retrieve(HttpRequest.GET("people/500/movie_credits"), Argument.listOf(Movie.class));
         //Assert
         assertThat(movies).hasSize(82);
+        movies.get(0).getGetImagePath().equals("*.jpg");
+
 
     }
     @Test
@@ -72,8 +74,7 @@ public class PersonEndPointTest {
         List<TVShow> tvs = httpClient.toBlocking().retrieve(HttpRequest.GET("people/500/tv_credits"), Argument.listOf(TVShow.class));
         //Assert
         assertThat(tvs).hasSize(26);
+        tvs.get(0).getImagePath().equals("*.jpg");
 
     }
-
-
 }
